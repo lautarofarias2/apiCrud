@@ -1,6 +1,7 @@
 package com.lautaro.crud.crud_spring.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -12,7 +13,8 @@ import com.lautaro.crud.crud_spring.models.Product;
 public interface ProductRepository extends CrudRepository<Product, Long>{
 
     //buscar por nombre
-    Optional<Product> findByName(String name);
+    @Query("select p from Product p where p.name LIKE %:name%")
+    List<Product> findProductsByName(String name);
     //menor precio
     @Query("select p from Product p where p.price = (select min(p2.price) from Product p2)")
     Optional<Product> findProductMinPrice();

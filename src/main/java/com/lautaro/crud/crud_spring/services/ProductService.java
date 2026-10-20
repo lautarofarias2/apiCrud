@@ -16,12 +16,16 @@ public class ProductService {
         this.repository = repository;
     }
 
-    public Iterable<Product> findAllProducts(){
-        return repository.findAll();
+    public List<Product> findAllProducts(){
+        return ((List<Product>)repository.findAll());
     }
 
     public Optional<Product> findProductById(Long id){
         return repository.findById(id);
+    }
+
+    public List<Product> findProductsByName(String name){
+        return repository.findProductsByName(name);
     }
 
     // producto mayor precio
